@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+ 
+{% comment %} <div class="container">
+    <div class="row">
+        <div class="col">
+            
+            {% for menu in menu_list %}
+                <div class="col-md-4">
+                    <img src="{% static 'images/logo.jpg' %}" class="img-fluid rounded-start" alt="placeholders">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="image-container">
+                                <div class="image-flash">
+                                    <h2 class="card-title">{{ menu.menu_title }}</h2> 
+                                </div>
+                            </div>
+                            <p class="card-text">€{{ menu.price }}</p>
+                            <a href="{% url 'menu_detail' menu.slug %}" class="post-link"> 
+                            </a>
+                            <hr /> 
+                        </div>
+                    </div>
+                </div>
+                 {% if menu.category == |divisibleby:2 %} 
+            </div>
+            <div class="row"> 
+                 {% endif %} 
+                {% endfor %}
+            </div>
+            
+        </div>
+    </div>
+</div> {% endcomment %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- Blog Entries Column -->         
+        <div class="col-12 mt-3 left">
+            <div class="row">            
+                {% for menu in menu_list %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="image-container">
+                                <img class="card-img-top" src="{{ menu.featured_image }}" alt="{{ menu.menu_title }}">
+                                <div class="image-flash">
+                                    <h2 class="card-title">{{ menu.menu_title }}</h2>                                    
+                                </div>
+                            </div>
+                            <p class="card-text">€{{ menu.price }}</p>
+                            <a href="{% url 'menu_detail' menu.slug %}" class="post-link">View meal details 
+                            </a>
+                            <hr />                            
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:3 %} 
+            </div>
+            <div class="row"> 
+                {% endif %} 
+                {% endfor %}
+            </div>           
+        </div>
+    </div>
+</div>
+
+
+{% comment %} <div class="container text-center">
+    <div class="row"> 
+        {% for menu in menu_list %}
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+        
+                <div class="col-md-4">
+                    <img src="{% static 'images/logo.jpg' %}" class="img-fluid rounded-start" alt="placeholders">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ menu.menu_title }}</h5>
+                        <p class="card-text"><small class="text-muted">€ {{ menu.price }}</small></p>
+                        <a href="{% url 'menu_detail' menu.slug %}" class="menu-details">View meal detail.</a>
+                    </div>
+                </div>
+                    {% if forloop.counter|divisibleby:2 %}
+                    <div class="row">
+                    {% endif %} 
+                    </div>
+                    
+            </div>
+        </div>
+        {% endfor %} 
+     </div>
+</div>  {% endcomment %}
+        
+{% comment %} <div class="container-fluid">
+    <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-12 mt-3 left">
+            <div class="row">
+                {% for post in post_list %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="image-container">
+                                <div class="image-flash">
+                                    <p class="author">Author: {{ post.author }}</p>
+                                </div>
+                            </div>
+                            <a href="#" class="post-link">
+                                <h2 class="card-title">{{ post.title }}</h2>
+                            </a>
+
+                            <hr />
+                            <p class="card-text text-muted h6">{{ post.created_on}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:3 %}
+            </div>
+            <div class="row">
+                {% endif %}
+                {% endfor %}
+
+            </div>
+        </div>
+    </div> {% endcomment %}
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+
+<!-- index.html content ends here -->
+{% endblock %}
