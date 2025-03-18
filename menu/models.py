@@ -23,7 +23,7 @@ class Menu(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name='category'
     )
-    featured_image = models.ImageField('image', default='placeholder')
+    featured_image = CloudinaryField('image', default='placeholder')
     description = models.TextField(blank=True, null=True)
     price = models.PositiveIntegerField()
 
